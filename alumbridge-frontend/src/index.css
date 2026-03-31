@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌈 Animated Background */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #5c55ed, #7f1fd9, #f4a3cc, #3f7ad8);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+  min-height: 100vh;
+}
+
+/* 🌙 DARK MODE */
+.dark body {
+  background: #111827;
+  color: white;
+}
+
+/* 🎯 ROLE THEMES */
+.student .theme-bg {
+  background: linear-gradient(to right, #3b82f6, #06b6d4);
+}
+
+.alumni .theme-bg {
+  background: linear-gradient(to right, #8b5cf6, #ec4899);
+}
+
+.admin .theme-bg {
+  background: linear-gradient(to right, #111827, #374151);
+}
+
+/* 🎯 BUTTON THEMES */
+.student .theme-btn {
+  background: linear-gradient(to right, #3b82f6, #06b6d4);
+}
+
+.alumni .theme-btn {
+  background: linear-gradient(to right, #8b5cf6, #ec4899);
+}
+
+.admin .theme-btn {
+  background: linear-gradient(to right, #111827, #374151);
+}
+
+.theme-btn {
+  color: white;
+  transition: 0.3s;
+}
+
+.theme-btn:hover {
+  transform: scale(1.05);
+}
+
+/* 💎 CARD */
+.card {
+  @apply bg-white/20 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-white/30;
+}
+
+/* 🌫️ BLOBS */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.4;
+  animation: float 12s infinite ease-in-out;
+}
+
+.blob1 {
+  width: 350px;
+  height: 350px;
+  background: #b669ff;
+  top: 10%;
+  left: 10%;
+}
+
+.blob2 {
+  width: 300px;
+  height: 300px;
+  background: #e376ac;
+  bottom: 10%;
+  right: 10%;
+}
+
+.blob3 {
+  width: 250px;
+  height: 250px;
+  background: #6a9bea;
+  top: 50%;
+  left: 50%;
+}
+
+/* ✨ ANIMATIONS */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) }
+  50% { transform: translateY(-40px) }
+  100% { transform: translateY(0px) }
+}
+
+/* 🌈 RAINBOW BUTTON */
+.rainbow-btn {
+  background: linear-gradient(
+    270deg,
+    #ff6ec4,
+    #7873f5,
+    #4facfe,
+    #43e97b,
+    #f9f871,
+    #ff6ec4
+  );
+  background-size: 600% 600%;
+  animation: rainbowMove 6s ease infinite;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.rainbow-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* 🌈 Animation */
+@keyframes rainbowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Default font */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🚀 AlumBridge Logo Font */
+.logo-text {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+}
+
+/* ✨ Description & Feature Font */
+.desc-text {
+  font-family: 'Sora', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+input:focus {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* 🎯 ROLE THEMES */
+
+body.student {
+  --theme-color: #4f46e5;
+}
+
+body.alumni {
+  --theme-color: #9333ea;
+}
+
+body.admin {
+  --theme-color: #dc2626;
+}
