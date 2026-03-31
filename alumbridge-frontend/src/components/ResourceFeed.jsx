@@ -11,6 +11,7 @@ function ResourceFeed({ setRefresh }) {
 
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
+  const userId = parseInt(localStorage.getItem("userId")) || 0;
 
   // ================= FETCH =================
   const fetchResources = async () => {
@@ -97,7 +98,7 @@ function ResourceFeed({ setRefresh }) {
 
     <div>
 
-      <h2 className="text-2xl font-bold mb-4 text-indigo-700">
+      <h2 className="text-2xl font-bold mb-4 text-white drop-shadow-md">
         📢 Resource Feed
       </h2>
 
@@ -105,7 +106,7 @@ function ResourceFeed({ setRefresh }) {
       <input
         type="text"
         placeholder="🔍 Search resources..."
-        className="w-full p-3 mb-5 rounded-xl border focus:ring-2 focus:ring-indigo-400"
+        className="w-full p-3 mb-5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:bg-white/20 focus:ring-2 focus:ring-indigo-400 outline-none transition"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -119,14 +120,14 @@ function ResourceFeed({ setRefresh }) {
 
         <div
           key={r.id}
-          className="bg-white dark:bg-gray-800 p-5 mb-5 rounded-xl shadow hover:shadow-lg transition"
+          className="bg-white/10 backdrop-blur-md border border-white/20 p-5 mb-5 rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:bg-white/20 transition"
         >
 
-          <h3 className="text-lg font-bold text-indigo-700">
+          <h3 className="text-lg font-bold text-white drop-shadow">
             {r.title}
           </h3>
 
-          <p className="text-gray-700 mt-2 dark:text-gray-300">
+          <p className="text-white/80 mt-2">
             {r.description}
           </p>
 
@@ -134,12 +135,12 @@ function ResourceFeed({ setRefresh }) {
             href={r.link}
             target="_blank"
             rel="noreferrer"
-            className="text-blue-500 block mt-2"
+            className="text-blue-300 hover:text-blue-200 block mt-2 hover:underline"
           >
             🔗 View Resource
           </a>
 
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-sm text-white/50 mt-2">
             Posted by {r.posted_by_name}
           </p>
 
@@ -160,7 +161,7 @@ function ResourceFeed({ setRefresh }) {
             </span>
 
             {/* DELETE BUTTON */}
-            {(role === "admin" || role === "alumni") && (
+            {(role === "admin" || (role === "alumni" && r.posted_by === userId)) && (
               <button
                 onClick={() => deleteResource(r.id)}
                 className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import StudentDashboard from "./pages/StudentDashboard";
 import AlumniDashboard from "./pages/AlumniDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -30,6 +31,12 @@ function App() {
         <Route
           path="/"
           element={token ? <Navigate to={`/${role}-dashboard`} /> : <Login />}
+        />
+
+        {/* REGISTER */}
+        <Route
+          path="/register"
+          element={token ? <Navigate to={`/${role}-dashboard`} /> : <Register />}
         />
 
         {/* STUDENT */}
