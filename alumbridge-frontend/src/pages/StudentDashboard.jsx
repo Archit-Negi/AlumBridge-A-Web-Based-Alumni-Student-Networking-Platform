@@ -47,7 +47,7 @@ function StudentDashboard() {
       
       {/* ── BACKGROUND VIDEO ── */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-0 blur-[1px] scale-105"
         src="https://videos.pexels.com/video-files/3129957/3129957-hd_1920_1080_25fps.mp4"
         autoPlay
         muted
