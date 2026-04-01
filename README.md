@@ -71,7 +71,11 @@ npm run dev
 Navigate to `http://localhost:5173` (or the port Vite provides) in your browser to view the application!
 
 ## 📸 Screenshots
-*(Add screenshots of your amazing Admin Dashboard and other pages here to impress viewers!)*
+<img width="1900" height="900" alt="image" src="https://github.com/user-attachments/assets/39f91536-2dbe-4820-af1b-dcd290585f00" />
+<img width="1892" height="900" alt="image" src="https://github.com/user-attachments/assets/9a3d0894-857e-4180-868a-f22b665720c0" />
+<img width="1906" height="907" alt="image" src="https://github.com/user-attachments/assets/0cca8ffd-48f1-403f-9b49-925b9a684ee0" />
+<img width="1906" height="912" alt="image" src="https://github.com/user-attachments/assets/f1f928e3-3d96-4e93-85f6-e22cb54a7702" />
+<img width="1909" height="911" alt="Screenshot 2026-04-02 000437" src="https://github.com/user-attachments/assets/b2e504bf-6798-442a-9d0b-2a2cdcfd2b7c" />
 
 ---
 *Developed with ❤️ as an educational and networking initiative.*
