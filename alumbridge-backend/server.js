@@ -51,6 +51,10 @@ app.use("/api/admin", adminRoutes);
 const notificationRoutes = require("./routes/notificationRoutes");
 app.use("/api/notifications", notificationRoutes);
 
+// Referral routes
+const referralRoutes = require("./routes/referralRoutes");
+app.use("/api/referrals", referralRoutes);
+
 // Start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
