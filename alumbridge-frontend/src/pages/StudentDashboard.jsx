@@ -56,10 +56,10 @@ function StudentDashboard() {
       />
       
       {/* ── STRONG DARK OVERLAY ── */}
-      <div className="absolute inset-0 z-10 bg-black/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 z-10 bg-black/80" />
 
       {/* ── Fixed Left Sidebar 100vh ── */}
-      <aside className="relative z-20 w-72 bg-white/5 border-r border-white/10 flex flex-col shadow-2xl backdrop-blur-md flex-shrink-0">
+      <aside className="relative z-20 w-72 bg-white/5 border-r border-white/10 flex flex-col shadow-2xl flex-shrink-0">
         
         {/* Logo Area */}
         <div className="h-20 flex items-center px-6 border-b border-white/10 shrink-0">
@@ -100,7 +100,7 @@ function StudentDashboard() {
           <div className="space-y-4 px-1">
             <p className="px-2 text-xs font-bold text-gray-400 uppercase tracking-widest">Quick Stats</p>
             
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
               <h3 className="font-bold text-indigo-300 text-sm mb-1">Your Progress</h3>
               <div className="flex items-end gap-2 mb-2">
                 <span className="text-2xl font-black">{points}</span>
@@ -112,7 +112,7 @@ function StudentDashboard() {
               <p className="text-[10px] text-gray-400 mt-2 font-medium tracking-wide">Keep learning daily 💪</p>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
               <h3 className="font-bold text-indigo-300 text-sm mb-3">Trending Skills</h3>
               <ul className="space-y-2 text-xs font-medium text-gray-300">
                 <li className="flex items-center gap-2">
@@ -132,7 +132,7 @@ function StudentDashboard() {
 
         {/* Bottom Profile / Logout */}
         <div className="p-5 border-t border-white/10 shrink-0 bg-black/20">
-          <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 mb-4 border border-white/10 backdrop-blur-sm">
+          <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 mb-4 border border-white/10">
             <div className="w-10 h-10 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-black flex items-center justify-center text-lg">
               {name.charAt(0).toUpperCase()}
             </div>
@@ -156,14 +156,14 @@ function StudentDashboard() {
       <main className="relative z-20 flex-1 flex flex-col h-screen overflow-hidden">
         
         {/* Top Minimal Header */}
-        <header className="h-20 bg-black/20 border-b border-white/10 flex items-center justify-between px-10 flex-shrink-0 backdrop-blur-md">
+        <header className="h-20 bg-black/20 border-b border-white/10 flex items-center justify-between px-10 flex-shrink-0">
           <div className="flex items-center gap-4">
             <h2 className="text-2xl font-black text-white tracking-tight hidden sm:block">
               {navLinks.find(l => l.id === tab)?.label || "Dashboard"}
             </h2>
           </div>
           <div className="flex items-center gap-5">
-            <span className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold bg-green-500/10 text-green-400 border border-green-500/20 backdrop-blur-sm">
+            <span className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold bg-green-500/10 text-green-400 border border-green-500/20">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
               Live Sync
             </span>
@@ -177,7 +177,7 @@ function StudentDashboard() {
             {tab === "dashboard" || tab === "resources" ? (
               <>
                 {/* Header Welcome */}
-                <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md shadow-2xl relative overflow-hidden">
+                <div className="bg-white/5 border border-white/10 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -mr-10 -mt-20"></div>
                   <div className="relative z-10">
                     <h1 className="text-3xl font-black text-white tracking-tighter drop-shadow-md">
@@ -192,7 +192,7 @@ function StudentDashboard() {
                 <ResourceFeed />
               </>
             ) : (
-              <div className="bg-white/5 border border-white/10 p-16 rounded-3xl backdrop-blur-md text-center shadow-2xl">
+              <div className="bg-white/5 border border-white/10 p-16 rounded-3xl text-center shadow-2xl">
                 <span className="text-6xl mb-4 block">🚧</span>
                 <h2 className="text-2xl font-black text-white mb-2">Module Under Construction</h2>
                 <p className="text-gray-400 text-sm font-medium">The {tab} features are currently being built.</p>

@@ -120,7 +120,7 @@ function ResourceFeed({ setRefresh }) {
 
         <div
           key={r.id}
-          className="bg-white/10 backdrop-blur-md border border-white/20 p-5 mb-5 rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:bg-white/20 transition"
+          className="bg-white/10 border border-white/20 p-5 mb-5 rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] hover:bg-white/20 transition"
         >
 
           <h3 className="text-lg font-bold text-white drop-shadow">

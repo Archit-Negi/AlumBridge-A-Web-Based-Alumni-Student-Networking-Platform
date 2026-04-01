@@ -31,7 +31,7 @@ function PostResource({ refreshResources }) {
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] mb-6 text-white">
+    <div className="bg-white/10 border border-white/20 p-6 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] mb-6 text-white">
       <h2 className="text-xl font-bold mb-4 drop-shadow">📤 Share Resource</h2>
 
       <input
