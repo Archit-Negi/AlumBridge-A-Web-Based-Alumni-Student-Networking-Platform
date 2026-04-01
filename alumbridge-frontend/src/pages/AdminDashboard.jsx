@@ -18,6 +18,9 @@ const ICONS = {
   ),
   admin: (
     <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+  ),
+  referrals: (
+    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
   )
 };
 
@@ -79,6 +82,9 @@ function AdminDashboard() {
   const [loadingResources, setLoadingResources] = useState(true);
   const [loadingLB, setLoadingLB] = useState(true);
 
+  const [referrals, setReferrals] = useState([]);
+  const [loadingReferrals, setLoadingReferrals] = useState(true);
+
   const fetchUsers = async () => {
     setLoadingUsers(true);
     try {
@@ -106,11 +112,33 @@ function AdminDashboard() {
     finally { setLoadingLB(false); }
   };
 
+  const fetchReferrals = async () => {
+    setLoadingReferrals(true);
+    try {
+      const res = await API.get("/referrals");
+      setReferrals(res.data);
+    } catch (e) { console.error(e); }
+    finally { setLoadingReferrals(false); }
+  };
+
   useEffect(() => {
     fetchUsers();
     fetchResources();
     fetchLeaderboard();
+    fetchReferrals();
   }, []);
+
+  const updateReferralStatus = async (id, status) => {
+    if (!window.confirm(`Are you sure you want to mark this referral as ${status}?`)) return;
+    try {
+      const res = await API.patch(`/referrals/${id}/status`, { status });
+      alert(res.data.message);
+      fetchReferrals();
+    } catch (e) {
+      alert("Failed to update status");
+      console.error(e);
+    }
+  };
 
   const deleteUser = async (id) => {
     try {
@@ -142,6 +170,7 @@ function AdminDashboard() {
     { id: "users", label: "Platform Users", icon: ICONS.users },
     { id: "resources", label: "Resource Hub", icon: ICONS.resources },
     { id: "leaderboard", label: "Leaderboard", icon: ICONS.leaderboard },
+    { id: "referrals", label: "Referrals", icon: ICONS.referrals },
   ];
 
   return (
@@ -459,6 +488,68 @@ function AdminDashboard() {
                             </tr>
                           );
                         })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+            {/* ══ REFERRALS TAB CONTENT ══ */}
+            {tab === "referrals" && (
+              <div className="bg-white/5 rounded-3xl shadow-2xl border border-white/10 overflow-hidden backdrop-blur-md mt-6">
+                <div className="px-8 py-6 border-b border-white/10 flex justify-between items-center bg-black/20">
+                  <h2 className="font-bold text-white text-xl tracking-tight">Referral Management</h2>
+                  <button onClick={fetchReferrals} className="text-sm font-bold text-white hover:text-indigo-300 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-lg flex items-center gap-2 transition">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Refresh
+                  </button>
+                </div>
+
+                {loadingReferrals ? (
+                  <div className="p-16 flex justify-center"><div className="w-10 h-10 border-4 border-indigo-400/30 border-t-indigo-400 rounded-full animate-spin"></div></div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm text-left align-middle border-collapse">
+                      <thead className="bg-black/30 text-gray-300 font-bold uppercase text-xs tracking-widest border-b border-white/10">
+                        <tr>
+                          <th className="px-8 py-5">Referral Info</th>
+                          <th className="px-8 py-5">Referred By (Alumni)</th>
+                          <th className="px-8 py-5">Status</th>
+                          <th className="px-8 py-5 text-right w-48">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/10">
+                        {referrals.map(ref => (
+                          <tr key={ref.id} className="hover:bg-white/5 transition-colors duration-200 group">
+                            <td className="px-8 py-5">
+                              <p className="font-bold text-white text-base drop-shadow-sm">{ref.student_name}</p>
+                              <p className="text-xs text-gray-400 mt-0.5">{ref.student_email}</p>
+                              <p className="text-[10px] font-bold text-indigo-400 mt-1 uppercase tracking-wider">{ref.company} - {ref.role}</p>
+                            </td>
+                            <td className="px-8 py-5">
+                              <p className="font-bold text-white text-base drop-shadow-sm">{ref.alumni_name}</p>
+                              <p className="text-xs text-gray-400 mt-0.5">{ref.alumni_email}</p>
+                            </td>
+                            <td className="px-8 py-5">
+                              <span className={`px-3 py-1.5 text-[10px] rounded-lg font-bold uppercase tracking-widest border shadow-sm
+                                ${ref.status === 'Selected' ? 'bg-green-500/20 text-green-300 border-green-500/30' : 
+                                  ref.status === 'Rejected' ? 'bg-red-500/20 text-red-300 border-red-500/30' : 
+                                  'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'}`}>
+                                {ref.status}
+                              </span>
+                            </td>
+                            <td className="px-8 py-5 text-right">
+                              {ref.status === "Pending" ? (
+                                <div className="flex justify-end gap-2">
+                                  <button onClick={() => updateReferralStatus(ref.id, 'Selected')} className="bg-green-600/20 hover:bg-green-600 text-green-300 hover:text-white border border-green-500/30 px-3 py-1 rounded-md text-xs font-bold transition">Accept</button>
+                                  <button onClick={() => updateReferralStatus(ref.id, 'Rejected')} className="bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/30 px-3 py-1 rounded-md text-xs font-bold transition">Reject</button>
+                                </div>
+                              ) : (
+                                <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Processed</span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
