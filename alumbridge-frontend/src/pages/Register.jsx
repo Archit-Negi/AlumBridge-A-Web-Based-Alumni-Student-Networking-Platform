@@ -52,7 +52,7 @@ function Register() {
 
       {/* ── BACKGROUND VIDEO ───────────────────────── */}
       <video
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover z-0 blur-[1px] scale-105"
         src={BG_VIDEO}
         autoPlay
         muted
