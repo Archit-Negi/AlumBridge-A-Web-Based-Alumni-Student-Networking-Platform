@@ -56,7 +56,7 @@ function CommentSection({ resourceId }) {
         <input
           type="text"
           placeholder="Write a comment..."
-          className="flex-1 p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white placeholder-white/30 focus:outline-none focus:border-indigo-500/50 transition-all font-medium"
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleComment()}
@@ -71,15 +71,15 @@ function CommentSection({ resourceId }) {
       </div>
 
       {/* COMMENTS */}
-      <div className="space-y-2">
+      <div className="space-y-3">
         {comments.length === 0 ? (
-          <p className="text-xs text-gray-400">No comments yet — be the first!</p>
+          <p className="text-xs text-white/40 italic">No comments yet — be the first to share your thoughts!</p>
         ) : (
           comments.map((c, i) => (
-            <div key={i} className="bg-gray-50 px-3 py-2 rounded-lg">
-              <p className="text-sm">
-                <span className="font-semibold text-indigo-600">{c.name}:</span>{" "}
-                {c.comment}
+            <div key={i} className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl transition-all hover:bg-white/10">
+              <p className="text-sm leading-relaxed">
+                <span className="font-bold text-indigo-400">{c.name}:</span>{" "}
+                <span className="text-white/90 ml-1">{c.comment}</span>
               </p>
             </div>
           ))
